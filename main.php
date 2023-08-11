@@ -116,9 +116,9 @@ $this->registerJsFile(Yii::getAlias('@web/js/common-end.js'), ['position' => yii
                 ['label' => 'Список годовых отчётов', 'url' => ['/report/archive'], 'visible' => User::canRoute('/report/archive')],
                 ]
             ],
-            ['label' => 'Документы', 'url' => 'http://ruhiv.ru/dokuments/', 'linkOptions' => ['target' => '_blank']],
-            ['label' => 'Статистика', 'url' => 'http://ruhiv.ru/statistika/', 'linkOptions' => ['target' => '_blank']],
-            ['label' => 'О Проекте', 'url' => 'http://ruhiv.ru/o-proekte/', 'linkOptions' => ['target' => '_blank']],
+            ['label' => 'Документы', 'url' => 'https://ruhiv.ru/dokuments/', 'linkOptions' => ['target' => '_blank']],
+            ['label' => 'Статистика', 'url' => 'https://ruhiv.ru/statistics/', 'linkOptions' => ['target' => '_blank']],
+            ['label' => 'О Проекте', 'url' => 'https://ruhiv.ru/about/', 'linkOptions' => ['target' => '_blank']],
             ['label' => 'Администрирование', 'items' =>
                 Common::adminMenuItems(),
             ],
