@@ -133,7 +133,6 @@ class ApiController extends _Controller
                     $modelSequence->type = $jsonDecode['seq_type'];
 
                     if ($modelSequence->validate()) {
-                        //$modelSequence->save();
                         $success[] = $jsonData['id'];
                     } else {
                         //Транзакция пред записи пациента
@@ -145,7 +144,7 @@ class ApiController extends _Controller
                 $i++;
             }
 
-            /*$responseOk = $client->createRequest()
+            $responseOk = $client->createRequest()
                 ->setFormat(Client::FORMAT_JSON)
                 ->setMethod('PUT')
                 ->setUrl($baseUrl . 'update?key=' . Yii::$app->params['secret_resist_api_key'])
@@ -153,7 +152,7 @@ class ApiController extends _Controller
                 ->send();
             if ($responseOk->isOk) {
                 Yii::warning('OK');
-            }*/
+            }
         }
 
         return $this->render('resist-api');
