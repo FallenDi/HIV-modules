@@ -578,7 +578,7 @@ class Patient extends \yii\db\ActiveRecord
                 ->all();
     }
 
-    //Функция получает данные по пациенту для таблиц и графиков главной страницы модератора и ФБУН ЦНИИЭ
+    //Функция получает данные по пациенту для таблиц и графиков главной страницы модератора и ФБУН ЦНИИЭ по определенному региону и тип сиквенсов
     public static function mainPagePatientFBUN2()
     {
         return  self::find()
@@ -595,23 +595,18 @@ class Patient extends \yii\db\ActiveRecord
             ->all();
     }
 
-    //Функция выбирает всех пациентов без ВЕЦА и без дублей
-    public static function uniquePatient()
+    //Функция выбирает всех пациентов без ВЕЦА с дублями или нет в зависимости от параметра $duplicate
+    public static function uniquePatient($duplicate = false)
     {
+	if(!$duplicete) {
+		$where =  ['=', 'possible_dup_id', 0];
+	} else {
+		$where = [];
+	}
+	    
         return self::find()
             ->with(['sequence'])
             ->where(['=', 'possible_dup_id', 0])
-            ->andWhere(['center_id' => Yii::$app->params['ru_center_id']])
-            ->distinct()
-            ->all();
-    }
-
-    //Функция выбирает всех пациентов без ВЕЦА с дублями (чтобы взять все последовательности)
-    public static function uniqueSequences()
-    {
-        return self::find()
-            ->with(['sequence'])
-            //->where(['=', 'possible_dup_id', 0])
             ->andWhere(['center_id' => Yii::$app->params['ru_center_id']])
             ->distinct()
             ->all();
@@ -676,10 +671,7 @@ class Patient extends \yii\db\ActiveRecord
         if ($where) {
             $query = Patient::find()
                 ->with(['diseaseStage', 'viralLoad', 'cdTest', 'hla', 'therapy', 'sequence'])
-                //->where(['!=', 'possible_dup_id', '0'])
                 ->where(['!=', 'possible_dup', 0])
-                ->orderBy('card_number')
-                ->addOrderBy('modify_at')
                 ->orderBy(['card_number' => SORT_NATURAL,'modify_at' => SORT_DESC])
                 ->all();
         } else {
@@ -688,7 +680,6 @@ class Patient extends \yii\db\ActiveRecord
                 ->where(['center_id' => $centerId])
                 ->andWhere(['!=', 'possible_dup_id', '0'])
                 ->andWhere(['!=', 'possible_dup', 0])
-                ->orderBy('card_number')
                 ->orderBy(['card_number' => SORT_NATURAL,'modify_at' => SORT_DESC])
                 ->all();
         }
@@ -718,7 +709,6 @@ class Patient extends \yii\db\ActiveRecord
         } else {
             $where = ['patient.center_id' => Yii::$app->params['EECA_center_id']];
         }
-
 
         return  self::find()
             ->leftJoin('patient_sequence', 'patient.id=patient_sequence.patient_id')
