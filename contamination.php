@@ -56,23 +56,25 @@ $form = ActiveForm::begin([
     ActiveForm::end();
 
     if ($resultArray) {
-        echo '<p> Проанализированно ' . $compareSeqCounter . ' последовательностей </p>';
-        echo '<br>';
-        echo '<br>';
-        echo '<br>';
+        echo '<p> Проанализированно ' . $compareSeqCounter . ' последовательностей </p> <br><br><br>';
+        $titlesContaminationArray = [
+            'N п/п',
+            'Номер карты',
+            'Дата загрузки',
+            'Участок',
+            'Протяженность',
+            'Абсолютное генетическое сходство в %',
+            'Абсолютное генетическое сходство в цифрах',
+            'Относительное генетическое сходство в %',
+            'Относительное генетическое сходство в цифрах'
+        ];
         ?>
         <table class="table table-bordered contaminaton-result">
             <thead>
                 <tr class="middle-style">
-                    <th class="middle-style">N п/п</th>
-                    <th class="middle-style">Номер карты</th>
-                    <th class="middle-style">Дата загрузки</th>
-                    <th class="middle-style">Участок</th>
-                    <th class="middle-style">Протяженность</th>
-                    <th class="middle-style">Абсолютное генетическое сходство в %</th>
-                    <th class="middle-style">Абсолютное генетическое сходство в цифрах</th>
-                    <th class="middle-style">Относительное генетическое сходство в %</th>
-                    <th class="middle-style">Относительное генетическое сходство в цифрах</th>
+                    <?php foreach ($titlesContaminationArray as $title) { 
+                        echo '<th class="middle-style">' . $title . '</th>'
+                            } ?>
                 </tr>
             </thead>
             <tbody>
