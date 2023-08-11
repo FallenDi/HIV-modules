@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ngalkin
- * Date: 14.05.2021
- * Time: 9:05
- */
-
 namespace app\controllers;
 
 use app\models\PatientSequencesApi;
