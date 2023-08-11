@@ -87,17 +87,14 @@ class FileController extends _Controller
                 if (!$dataArray || $dupBatchCardsNumbers) {
 
                     // устанавливаем значение flash сообщения если найдены дубли в батче
-                    /*if ($dupBatchBundle) {
+                    if ($dupBatchBundle) {
                         $session->setFlash('incorrect-data', 'В файле содержатся возможные дубли, проверьте номера карт: ' . implode(', ', $dupBatchBundle));
-                    } else*/
+                    } 
                     if ($dupBatchCardsNumbers) {
                         $session->setFlash('incorrect-data', 'В файле содержатся одинаковые номера карт: ' . implode(', ', $dupBatchCardsNumbers));
                     } elseif (!$dataArray) {
                         $session->setFlash('incorrect-data', 'Некорректно заполненный файл, скачайте шаблон и загрузите корректные данные');
-                    } /*elseif ($dupSequence) {
-                        $session->setFlash('incorrect-data', 'В файле содержатся идеентичные сиквенсы, проверьте следующие последовательности: ' . implode('<br><br>', $dupSequence));
-
-                    }*/ else {
+                    } else {
                         $session->setFlash('incorrect-data', Yii::$app->params['excelErrorValidation']);
                     }
 
